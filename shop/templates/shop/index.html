@@ -43,6 +43,9 @@
         </div>
     </div>
 {% endif %}
+
+{% if category %}
 {% include 'pagination.html' with page=paginate_products %}
+{% endif %}
 
 {% endblock %}
