@@ -10,10 +10,28 @@
 {% block middle %}
 
 {% if category %}
-{{ category.name }}
-    {% for product in products %}
-    {{ product.name }}
-    {% endfor %}
+<div class="row">
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-dark text-center">{{ category.name }}</li>
+    </ul>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for product in paginate_products %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description|truncatechars:80 }}</p>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endif %}
+{% include 'pagination.html' with page=paginate_products %}
 
 {% endblock %}
