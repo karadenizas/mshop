@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load categories_tags %}
+{% load static %}
 
-{% block title %}Mshop | Fashion{% endblock %}
+{% block title %}MSHOP | Fashion{% endblock %}
 
 {% block left %}
 {% categories_tags %}
@@ -18,19 +19,29 @@
         {% for product in paginate_products %}
         <div class="col">
             <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="{% if product.image %}{{ product.image.url }}{% endif %}" class="card-img-top" alt="..." height="300">
                 <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.description|truncatechars:80 }}</p>
+                <h5 class="card-title"><a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none">{{ product.name }}</a></h5>
+                <p class="card-text"><a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none">{{ product.description|truncatechars:80 }}</a></p>
                 </div>
-                <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+                <div class="card-footer text-center fs-4">
+                <small class="text-dark">${{ product.price }}</small>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
 </div>
+
+{% else %}
+    <div class="card bg-light text-dark">
+        <img src="{% static 'img/background3.jpg' %}" class="card-img" alt="..." width="500" height="500">
+        <div class="card-img-overlay"><br><br><br><br>
+        <h5 class="card-title text-center fs-1">MSHOP FASHION</h5><br><br><br>
+        <p class="card-text text-center fs-4">This is an e-commerce site for apparel store.</p><br><br><br><br><br><br><br>
+        <p class="card-text text-center">created by <a href="https://karadenizas.github.io" class="text-dark">karadenizas</a></p>
+        </div>
+    </div>
 {% endif %}
 {% include 'pagination.html' with page=paginate_products %}
 

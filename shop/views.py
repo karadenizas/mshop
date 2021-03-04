@@ -36,7 +36,7 @@ def product_detail(request, id, slug):
         'categories': categories,
         'product': product,
     }
-    return render(request, 'shop/detail.html', context)
+    return render(request, 'shop/product_detail.html', context)
 
 
 def test(request):
