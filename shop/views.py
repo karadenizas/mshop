@@ -2,24 +2,20 @@ from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 
 
-def base_navbar(request):
-    categories = Category.objects.all()
-    return render(request, 'base.html', {'categories': categories})
-
-def base(request, category_slug=None):
-    product = None
+def index(request, category_slug=None):
     category = None
-    categories = Category.objects.all()
+    products = None
+
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
-        product = Product.objects.filter(category=category)
+        products = Product.objects.filter(category=category)
 
     context = {
-        'categories': categories,
         'category': category,
-        'product': product,
+        'products': products,
     }
-    return render(request, 'base.html', context)
+
+    return render(request, 'shop/index.html', context)
 
 def product_detail(request, id, slug):
     categories = Category.objects.all()

@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
+{% load categories_tags %}
 
-{% block content %}THIS IS INDEX{% endblock %}
+{% block title %}Mshop | Fashion{% endblock %}
 
-{% block content %}
+{% block left %}
+{% categories_tags %}
+{% endblock %}
+
+{% block middle %}
+
+{% if category %}
+{{ category.name }}
+    {% for product in products %}
+    {{ product.name }}
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
