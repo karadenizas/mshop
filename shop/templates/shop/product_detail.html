@@ -15,7 +15,7 @@
         <li class="list-group-item list-group-item-dark text-center">{{ product.name }}</li>
     </ul>
 </div>
-<br>
+<br><br>
 <div class="row">
     <div class="card mb-3">
         <div class="row g-0">
@@ -27,6 +27,11 @@
               <h5 class="card-title">{{ product.name }}</h5>
               <p class="card-text">{{ product.description }}</p>
               <p class="card-text fs-2">${{ product.price }}</p>
+              <form action="{% url 'cart:cart_add' product.id %}" method="POST">
+                {{ cart_product_form }}
+                {% csrf_token %}
+                <input type="submit" value="Add to Cart">
+              </form>
             </div>
           </div>
         </div>
