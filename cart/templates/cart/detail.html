@@ -2,7 +2,7 @@
 {% load static %}
 {% load categories_tags %}
 
-{% block title %}Your shopping cart{% endblock %}
+{% block title %}Shopping Cart{% endblock %}
 
 {% block left %}
 {% categories_tags %}
@@ -10,70 +10,70 @@
 
 {% block middle %}
 
+<div class="row">
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-dark text-center">Your Shopping Cart</li>
+  </ul>
+</div>
+
 {% for item in cart %}
   {% with product=item.product %}
-  <div class="row">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-dark text-center">Your Shopping Cart</li>
-    </ul>
-  </div>
-  <br><br>
-  <div class="row">
-    <div class="card-4">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src="{% if product.image %}{{ product.image.url }}{% endif %}" alt="..." width="200" height="300">
-        </div>
-        <div class="col-8">
-          <div class="card-body">
-            <h5 class="card-title"><a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none">{{ product.name }}</a></h5>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <td>Quantity</td>
-                  <td>
-                    <form action="{% url 'cart:cart_add' product.id %}" method="POST" class="text-end">
-                      <p class="text-start text-dark fs-4">{{ item.quantity }}</p>
-                      {{ item.update_quantity_form.quantity }}
-                      {{ item.update_quantity_form.override }}
-                      <input type="submit" class="btn btn-secondary" value="Update">
-                      {% csrf_token %}
-                    </form>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Remove</td>
-                  <td>
-                    <form action="{% url 'cart:cart_remove' product.id %}" method="POST">
-                      <div class="text-end">
-                        <input type="submit" class="btn btn-secondary" value="Remove">
-                        {% csrf_token %}
-                      </div>
-                    </form>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Unit Price</td>
-                  <td><p class="fs-4">${{ item.price }}</p></td>
-                </tr>
-                <tr>
-                  <td>Price</td>
-                  <td><p class="fs-4">${{ item.total_price }}</p></td>
-                </tr>
-                <tr>
-                  <td>Total</td>
-                  <td><p class="fs-4">${{ cart.get_total_price }}</p></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">{{product.name}}</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Unit Price</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><img src="{% if product.image %}{{ product.image.url }}{% endif %}" alt="..." width="100" height="150"></th>
+        <td> 
+            <p class="fs-4">{{ item.quantity }}</p>
+        </td>
+        <td class="fs-4">${{ item.price }}</td>
+        <td class="fs-4">${{ item.total_price }}</td>
+      </tr>
+      <tr>
+        <th>
+          <form action="{% url 'cart:cart_add' product.id %}" method="POST" class="text-start">
+            <div class="">
+              {{ item.update_quantity_form.quantity }}
+              {{ item.update_quantity_form.override }}
+              <input type="submit" class="btn btn-secondary" value="Update">
+            </div>
+            {% csrf_token %}
+          </form>
+        </th>
+        <th>
+          <form action="{% url 'cart:cart_remove' product.id %}" method="POST">
+              <input type="submit" class="btn btn-secondary" value="Remove">
+              {% csrf_token %}
+          </form>
+        </th>
+      </tr>
+    </tbody>
+  </table>
 
   {% endwith %}
 {% endfor %}
+
+<table class="table">
+  <tbody>
+    <tr class="table-secondary">
+      <th class="fs-4">Total Price</th>
+      <th scope="row"><p class="text-end fs-5">${{ cart.get_total_price }}</p></th>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <p class="text-end">
+    <a href="{% url 'shop:index' %}" class="btn btn-secondary">Continue Shopping</a>
+  </p>
+</div>
 
 {% endblock %}
 
