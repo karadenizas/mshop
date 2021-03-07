@@ -29,9 +29,17 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="#">null</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'cart:cart_detail' %}">Cart</a>
-                        </li>
+                        {% with total_items=cart|length %}
+                          {% if total_items > 0 %}
+                            <li class="nav-item">
+                                <a class="nav-link active text-success" href="{% url 'cart:cart_detail' %}">Your Cart: {{ total_items }} item{{total_items|pluralize }}, ${{ cart.get_total_price }}</a>
+                            </li>
+                          {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link active text-secondary" href="{% url 'cart:cart_detail' %}">Your Cart: Empty</a>
+                            </li>
+                          {% endif %}
+                        {% endwith %}
                         <li class="nav-item">
                             <a class="nav-link active" href="{% url 'shop:test' %}">TEST</a>
                         </li>
