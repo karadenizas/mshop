@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load categories_tags %}
+
+{% block title %}Checkout Shopping{% endblock %}
+
+{% block left %}
+{% categories_tags %}
+{% endblock %}
+
+{% block middle %}
+
+<div class="row">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-dark text-center">Checkout</li>
+    </ul>
+</div>
+
+  <h3>Your order</h3>
+  <ul>
+    {% for item in cart %}
+      <li>
+        {{ item.quantity }}x {{ item.product.name }}
+        <span>${{ item.total_price }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+  <p>Total: ${{ cart.get_total_price }}</p>
+  
+  <div class="row">
+    <form method="POST">
+      {{form.as_p}}
+      <input type="submit" value="Place Order" class="btn btn-secondary">
+      {% csrf_token %}
+    </form>
+  </div>
+  <br>
+{% endblock %}

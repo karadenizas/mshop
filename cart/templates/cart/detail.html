@@ -76,10 +76,24 @@
 
 {% endif %}
 
+{% if cart %}
+
+<div class="row">
+  <p class="text-end">
+    <a href="{% url 'shop:index' %}" class="btn btn-secondary">Continue Shopping</a>
+    <a href="{% url 'orders:order_create' %}" class="btn btn-secondary">Checkout</a>
+  </p>
+</div>
+
+{% else %}
+
 <div class="row">
   <p class="text-end">
     <a href="{% url 'shop:index' %}" class="btn btn-secondary">Continue Shopping</a>
   </p>
 </div>
+
+{% endif %}
+
 
 {% endblock %}

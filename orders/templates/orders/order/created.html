@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load categories_tags %}
+
+{% block title %}Thank You{% endblock %}
+
+{% block left %}
+{% categories_tags %}
+{% endblock %}
+
+{% block middle %}
+
+<div class="row">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-dark text-center">Successfully !</li>
+    </ul>
+    <h2>Thank you!</h2>
+    <p>Your order has been successfully completed. Your order number is {{ order.id }}</p>
+</div>
+
+
+{% endblock %}
