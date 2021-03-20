@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load categories_tags %}
+
+{% block title %}Register | Mshop{% endblock %}
+
+{% block left %}
+{% categories_tags %}
+{% endblock %}
+
+{% block middle %}
+
+<div class="row">
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-dark text-center">Register</li>
+    </ul>
+</div>
+
+<div class="row">
+    <h3>Registration Form</h3>
+    <form method="POST">
+        {{ user_form.as_p }}
+        <input type="submit" value="Register" class="btn btn-secondary">
+        {% csrf_token %}
+    </form>
+</div>
+
+
+{% endblock %}
