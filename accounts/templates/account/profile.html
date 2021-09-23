@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load categories_tags %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block left %}
+{% categories_tags %}
+{% endblock %}
+
+{% block middle %}
+<a href="{% url 'password_change' %}">Change your password</a>
+{% endblock %}
