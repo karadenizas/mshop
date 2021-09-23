@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load categories_tags %}
+
+{% block title %}Registration is Done!{% endblock %}
+
+{% block left %}
+{% categories_tags %}
+{% endblock %}
+
+{% block middle %}
+<p>Your registration is successfull!</p>
+<p> <a href="{% url 'login' %}">Press Login</a> to continue!</p>
+{% endblock %}

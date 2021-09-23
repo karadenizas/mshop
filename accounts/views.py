@@ -6,6 +6,10 @@ def account(request):
     return render(request, 'account/account.html')
 
 
+def profile(request):
+    return render(request, 'profile/profile.html')
+
+
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrartionForm(request.POST)
