@@ -26,7 +26,8 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">null</a>
                         </li>
-
+                        {% if request.user.is_authenticated %}
+                        {% else %}
                         {% with total_items=cart|length %}
                           {% if total_items > 0 %}
                             <li class="nav-item">
@@ -38,6 +39,7 @@
                             </li>
                           {% endif %}
                         {% endwith %}
+                        {% endif %}
 
                         {% if request.user.is_authenticated %}
                             <li class="nav-item">

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load categories_tags %}
+
+{% block title %}My Cart{% endblock %}
+
+{% block left %}{% categories_tags %}{% endblock %}
+
+{% block middle %}
+<h1>My Cart</h1>
+{% if messages %}
+{% for message in messages %}
+{{message|safe}}
+{% endfor %}
+{% endif %}
+{% for post in product %}
+<p>{{ post }}</p>
+<p>{{ post.quantity }}</p>
+{% endfor %}
+{% endblock %}

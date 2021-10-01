@@ -27,11 +27,19 @@
               <h5 class="card-title">{{ product.name }}</h5>
               <p class="card-text">{{ product.description }}</p>
               <p class="card-text fs-2">${{ product.price }}</p>
+              {% if request.user.is_authenticated %}
+              <form action="{% url 'cart:my_cart_add' product.id %}" method="POST">
+                {{ cart_product_form }}
+                {% csrf_token %}
+                <input type="submit" value="Add to Cart USER">
+              </form>
+              {% else %}
               <form action="{% url 'cart:cart_add' product.id %}" method="POST">
                 {{ cart_product_form }}
                 {% csrf_token %}
                 <input type="submit" value="Add to Cart">
               </form>
+              {% endif %}
             </div>
           </div>
         </div>

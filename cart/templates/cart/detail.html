@@ -16,6 +16,9 @@
   </ul>
 </div>
 
+{% if request.user.is_authenticated %}
+  <meta http-equiv="REFRESH" content="0;url=http://127.0.0.1:8000"> <!-- this will be fixed. will be controlled in views -->
+{% else %}
 {% if cart %}
   {% for item in cart %}
     {% with product=item.product %}
@@ -93,6 +96,7 @@
   </p>
 </div>
 
+{% endif %}
 {% endif %}
 
 
