@@ -34,7 +34,8 @@ def my_cart_add(request, product_id):
         return redirect('cart:my_cart')
     elif form.is_valid():
         cd = form.cleaned_data
-        m_cart = Mycart.objects.update_or_create(user=user, product=product, quantity=cd['quantity'], price=product.price)
+        m_cart = Mycart.objects.update_or_create(user=user, product=product, quantity=cd['quantity'], price=product.price,
+                                                image=product.image.url)
     return redirect('cart:my_cart')
 
 
@@ -60,9 +61,18 @@ def cart_detail(request):
 def my_cart(request):
     user = request.user
     product = Mycart.objects.filter(user=user)
-    # for item in product:
-    #     if item
+    if request.method == 'POST':
+        form = CartAddProductForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            update_data = Mycart.objects.filter(id=cd['product_id']).update(quantity=cd['quantity'])
+            return HttpResponse(request.POST.get(cd['quantity']))
+            return redirect('cart:my_cart')
+    else:
+        form = CartAddProductForm()
+
     context = {
         'product': product,
+        'form': form,
     }
     return render(request, 'cart/my_cart.html', context)

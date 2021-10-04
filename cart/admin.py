@@ -4,4 +4,4 @@ from .models import Mycart
 
 @admin.register(Mycart)
 class MycartAdmin(admin.ModelAdmin):
-    list_display = ['user', 'product', 'price', 'quantity']
+    list_display = ['user', 'product', 'price', 'quantity', 'image']

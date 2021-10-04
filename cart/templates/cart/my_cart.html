@@ -7,11 +7,49 @@
 
 {% block middle %}
 <h1>My Cart</h1>
+<div class="row">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-dark text-center">Your Shopping Cart</li>
+    </ul>
+</div>
+
 {% if messages %}
 {% for message in messages %}
 {{message|safe}}
 {% endfor %}
 {% endif %}
+
+{% for prod in product %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">{{prod.product}}</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row"><img src="{{ prod.image }}" alt="..." width="100" height="150"></th>
+            <td><p class="fs-4">{{prod.quantity}}</p></td>
+            <td class="fs-4">${{prod.price}}</td>
+            <td class="fs-4">${{prod.get_total_price}}</td>
+        </tr>
+        <th>
+            <form action="{% url 'cart:my_cart' %}" method="POST" class="text-start">
+                <div class=""></div>
+                    {{form.product_id}}
+                    {{form.quantity}}
+                    <input type="submit"  class="btn btn-secondary" value="Update">
+                    {% csrf_token %}
+                </div>
+            </form>
+        </th>
+    </tbody>
+</table>
+{% endfor %}
+
 {% for post in product %}
 <p>{{ post }}</p>
 <p>{{ post.quantity }}</p>
