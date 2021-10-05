@@ -28,7 +28,7 @@
               <p class="card-text">{{ product.description }}</p>
               <p class="card-text fs-2">${{ product.price }}</p>
               {% if request.user.is_authenticated %}
-              <form action="{% url 'cart:my_cart_add' product.id %}" method="POST">
+              <form action="#" method="POST">
                 {{ cart_product_form }}
                 {% csrf_token %}
                 <input type="submit" value="Add to Cart USER">

@@ -28,7 +28,7 @@
                         </li>
                         {% if request.user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'cart:my_cart' %}">My Cart</a>
+                            <a class="nav-link active" href="#">My Cart</a>
                         </li>
                         {% else %}
                         {% with total_items=cart|length %}
@@ -46,7 +46,7 @@
 
                         {% if request.user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link active" href="{% url 'profile' %}">Profile</a>
+                                <a class="nav-link active" href="#">Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="{% url 'logout' %}">Logout</a>

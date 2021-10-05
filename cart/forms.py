@@ -12,4 +12,3 @@ class CartAddProductForm(forms.Form):
     override = forms.BooleanField(required=False,
                                   initial=False,
                                   widget=forms.HiddenInput)
-    product_id = forms.IntegerField(required=False, initial=['prod.id'])

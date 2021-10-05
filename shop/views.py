@@ -3,7 +3,6 @@ from .models import Category, Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from cart.forms import CartAddProductForm
 ######## TEST IMPORTS #######
-from cart.models import Mycart
 from django.http import HttpResponse
 
 
@@ -46,10 +45,4 @@ def product_detail(request, id, slug):
 
 
 def test(request):
-    user = request.user
-    m1 = Mycart.objects.all()
-    if user.is_authenticated:
-        return HttpResponse('user is valid!')
-    else:
-        return HttpResponse('user is not valid!')
     return render(request, 'test.html')
