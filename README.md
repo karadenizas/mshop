@@ -1,1 +1,1 @@
-# mshop is example e-commerce app
+#  MSHOP is example project created using sessions.
